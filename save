@@ -1,0 +1,154 @@
+class callPY(object):
+    def__init___(self,path='D:\BE Comp Project\Project UI\indiatv.py'):
+    self.path=path
+
+    def  call_scrapping_code(self):
+    call(["Python3","{}".format(self.path)])
+=CallPy()
+    c.call_scrapping_code()
+    url = st.text_input("T
+
+      c=CallPy()
+    c.call_scrapping_code()
+
+
+
+code for Polarity without function
+
+import streamlit as st
+import pandas as pd
+import numpy as np
+import base64
+from subprocess import call
+
+main_bg = "Polarity.jpg"
+main_bg_ext = "jpg"
+st.markdown(
+    f"""
+    <style>
+
+
+    .reportview-container {{
+        background-image: url(data:image/{main_bg_ext};base64,{base64.b64encode(open(main_bg, "rb").read()).decode()});
+        background-size: cover;
+        background-repeat: no-repeat;        
+    }}
+    
+
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+def Analyze_Function():
+    Heading=st.text_input("The Heading","Heading will be displayed")
+    Des=st.text_area("Description","Description")        # Negative statement
+    st.error("Negative") 
+
+            # Positive statement 
+    st.success("Positive") 
+
+            # Neutral statement 
+    st.info("Neutral") 
+
+
+ 
+st.markdown("<h1 style='text-align: center; color: white;'>Polarity Classification</h1>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: yellow;'>Paste the URL of the Article</h3>", unsafe_allow_html=True)
+name = st.text_input("","https://" ) 
+ana=st.button("Analyze");
+    
+if ana:
+     Analyze_Function()
+
+
+
+import streamlit as st
+import pandas as pd
+import numpy as np
+import base64
+from subprocess import call
+
+
+main_bg = "Polarity.jpg"
+main_bg_ext = "jpg"
+st.markdown(
+    f"""
+    <style>
+
+
+    .reportview-container {{
+        background-image: url(data:image/{main_bg_ext};base64,{base64.b64encode(open(main_bg, "rb").read()).decode()});
+        background-size: cover;
+        background-repeat: no-repeat;        
+    }}
+    
+
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+def Analyze_Function():
+    Heading=st.text_input("The Heading","Heading will be displayed")
+    Des=st.text_area("Description","Description")        # Negative statement
+    st.error("Negative") 
+
+            # Positive statement 
+    st.success("Positive") 
+
+            # Neutral statement 
+    st.info("Neutral") 
+
+
+def  Polarity():
+    st.markdown("<h1 style='text-align: center; color: white;'>Polarity Classification</h1>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: yellow;'>Paste the URL of the Article</h3>", unsafe_allow_html=True)
+    name = st.text_input("","https://" ) 
+    ana=st.button("Analyze");
+        
+    if ana:
+        Analyze_Function()
+
+
+
+
+
+def Web_Scrapping():
+    url = pd.read_csv("data.csv")
+    for url in urls:
+        page=requests.get(url)
+        page.text
+        soup=BeautifulSoup(page.text,'html.parser')
+        soup.find('p', class_='ft-social--txt').decompose()
+        soup.find('div', class_='ft-social--wrap').decompose()
+        soup.find('div',  attrs={'id':'jiosaavn-widget'}).decompose()
+        soup.find('div',  attrs={'class':'ins_instory_dv'}).decompose()
+
+        soup.find('aside', class_='col-300').decompose()
+        soup.find('div',  attrs={'class':'reltd-main'}).decompose()
+        
+        headline_ele=soup.find("div",{'class':"sp-ttl-wrp"}).h1.text
+        headline = st.text_input("Headline",headline_ele.text)
+        print("\n")
+        
+        print("DESCRIPTION")
+        print("\n")
+        
+        description_name=[]
+        description_ele=soup.find_all("p")
+        
+        for item in description_ele:
+            description_name.append(item.text)
+        #print(description_name)
+    
+        
+        str1 = ''.join(description_name)
+
+
+        x = str1.split('.')
+        y = str1.replace(".", ".\n")
+
+        print(y)
+        URL = st.text_input("Url",url)
+
+        print("\n")
+        st.text_area("Description",y,1000)
