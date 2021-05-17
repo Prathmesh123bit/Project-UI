@@ -4,49 +4,58 @@ import numpy as np
 import csv
 import base64
 import xlsxwriter
-from subprocess import call
 from indiatv import *
+from subprocess import call
+from ndtvscrapper import *
 from csv import reader
-main_bg = "Polarity.jpg"
+main_bg = "bg.jpg"
 main_bg_ext = "jpg"
 
 
 def Polarity():
-    st.markdown(
-        f"""
-        <style>
+#    st.markdown(
+ #       f"""
+  #      <style>
 
 
-        .reportview-container {{
-            background-image: url(data:image/{main_bg_ext};base64,{base64.b64encode(open(main_bg, "rb").read()).decode()});
-            background-size: cover;
-            background-repeat: no-repeat;        
-        }}
+   #     .reportview-container {{
+     #       background-image: url(data:image/{main_bg_ext};base64,{base64.b64encode(open(main_bg, "rb").read()).decode()});
+    #        background-size: cover;
+      #      background-repeat: no-repeat;        
+      #  }}
 
 
-        </style>
-        """,
-        unsafe_allow_html=True
-    ) 
+       # </style>
+        #""",
+     #   unsafe_allow_html=True
+    #)
+    select_option=['NDTV Article','INDIATV Article']
+    page=st.sidebar.radio('',select_option)
+    if page=='NDTV Article':
+      st.sidebar.markdown("<h3 style='text-align: center; color: yellow;'>NDTV Article</h3>", unsafe_allow_html=True)
+      st.sidebar.markdown("<h3 style='text-align: center; color: yellow;'>Paste the URL of the Article</h3>", unsafe_allow_html=True)
+      name1 = st.sidebar.text_input("","https://" )
+      ana=st.sidebar.button("Analyze")
+      name = ([name1])
+      if ana:
+        url=name
+        #st.write(url)
+        #url.append(name)
+        #filename='data.csv'
+        #with open(filename,'w') as csvwrite:
+         #   csvwriter=csv.writer(csvwrite,delimiter='-')
+          #  csvwriter.writerow(name)
+        Web_Scrapper(url)
 
-    st.markdown("<h1 style='text-align: center; color: white;'>Polarity Classification</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center; color: yellow;'>Paste the URL of the Article</h3>", unsafe_allow_html=True)
-    name1 = st.text_input("","https://" )
-    name = ([name1])
-    st.write(name)
-    if st.button("Analyze"):
-        
-        #df=pd.DataFrame([name])
-        #df.to_csv('data.csv')
-        filename='data.csv'
-        with open(filename,'w') as csvwrite:
-            csvwriter=csv.writer(csvwrite,delimiter='-')
-            csvwriter.writerow(name)
-        Web_Scrapping()
-        # wb = xlsxwriter.Workbook(filename)
-        # ws = wb.add_worksheet()
-        # ws.write(name)
-        # wb.close()
-        
+    else:
+      st.sidebar.markdown("<h3 style='text-align: center; color: yellow;'>INDTV Article</h3>", unsafe_allow_html=True)
+      st.sidebar.markdown("<h3 style='text-align: center; color: yellow;'>Paste the URL of the Article</h3>", unsafe_allow_html=True)
+      name2 = st.sidebar.text_input("","https://" )
+      ana1=st.sidebar.button("Analyze")
+      name3 = ([name2])
+      if ana1:
+        url=name3
+       # st.write(url)
+        web_Scrapping(url)
 
         

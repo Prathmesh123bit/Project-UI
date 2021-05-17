@@ -1,154 +1,57 @@
-class callPY(object):
-    def__init___(self,path='D:\BE Comp Project\Project UI\indiatv.py'):
-    self.path=path
-
-    def  call_scrapping_code(self):
-    call(["Python3","{}".format(self.path)])
-=CallPy()
-    c.call_scrapping_code()
-    url = st.text_input("T
-
-      c=CallPy()
-    c.call_scrapping_code()
-
-
-
-code for Polarity without function
-
+from bs4 import BeautifulSoup
 import streamlit as st
+import requests
+import csv
 import pandas as pd
-import numpy as np
-import base64
-from subprocess import call
-
-main_bg = "Polarity.jpg"
-main_bg_ext = "jpg"
-st.markdown(
-    f"""
-    <style>
-
-
-    .reportview-container {{
-        background-image: url(data:image/{main_bg_ext};base64,{base64.b64encode(open(main_bg, "rb").read()).decode()});
-        background-size: cover;
-        background-repeat: no-repeat;        
-    }}
-    
-
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-def Analyze_Function():
-    Heading=st.text_input("The Heading","Heading will be displayed")
-    Des=st.text_area("Description","Description")        # Negative statement
-    st.error("Negative") 
-
-            # Positive statement 
-    st.success("Positive") 
-
-            # Neutral statement 
-    st.info("Neutral") 
-
-
- 
-st.markdown("<h1 style='text-align: center; color: white;'>Polarity Classification</h1>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center; color: yellow;'>Paste the URL of the Article</h3>", unsafe_allow_html=True)
-name = st.text_input("","https://" ) 
-ana=st.button("Analyze");
-    
-if ana:
-     Analyze_Function()
-
-
-
-import streamlit as st
-import pandas as pd
-import numpy as np
-import base64
-from subprocess import call
-
-
-main_bg = "Polarity.jpg"
-main_bg_ext = "jpg"
-st.markdown(
-    f"""
-    <style>
-
-
-    .reportview-container {{
-        background-image: url(data:image/{main_bg_ext};base64,{base64.b64encode(open(main_bg, "rb").read()).decode()});
-        background-size: cover;
-        background-repeat: no-repeat;        
-    }}
-    
-
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-def Analyze_Function():
-    Heading=st.text_input("The Heading","Heading will be displayed")
-    Des=st.text_area("Description","Description")        # Negative statement
-    st.error("Negative") 
-
-            # Positive statement 
-    st.success("Positive") 
-
-            # Neutral statement 
-    st.info("Neutral") 
-
-
-def  Polarity():
-    st.markdown("<h1 style='text-align: center; color: white;'>Polarity Classification</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center; color: yellow;'>Paste the URL of the Article</h3>", unsafe_allow_html=True)
-    name = st.text_input("","https://" ) 
-    ana=st.button("Analyze");
-        
-    if ana:
-        Analyze_Function()
-
-
-
-
+from csv import reader
 
 def Web_Scrapping():
-    url = pd.read_csv("data.csv")
     for url in urls:
-        page=requests.get(url)
-        page.text
-        soup=BeautifulSoup(page.text,'html.parser')
-        soup.find('p', class_='ft-social--txt').decompose()
-        soup.find('div', class_='ft-social--wrap').decompose()
-        soup.find('div',  attrs={'id':'jiosaavn-widget'}).decompose()
-        soup.find('div',  attrs={'class':'ins_instory_dv'}).decompose()
-
-        soup.find('aside', class_='col-300').decompose()
-        soup.find('div',  attrs={'class':'reltd-main'}).decompose()
-        
-        headline_ele=soup.find("div",{'class':"sp-ttl-wrp"}).h1.text
-        headline = st.text_input("Headline",headline_ele.text)
-        print("\n")
-        
-        print("DESCRIPTION")
-        print("\n")
-        
-        description_name=[]
-        description_ele=soup.find_all("p")
-        
-        for item in description_ele:
-            description_name.append(item.text)
-        #print(description_name)
+    summary = []
+    df = pd.read_csv("data.csv")
+    session = requests.Session()
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Linux; Android 5.0; SM-G920A) AppleWebKit (KHTML, like Gecko) Chrome Mobile Safari (compatible; AdsBot-Google-Mobile; +http://www.google.com/mobile/adsbot.html)'
+        }
+    # open both files
+   # with open('data1.csv','r') as firstfile, open('data.csv','a') as secondfile:
+   #     for line in firstfile:
+    #        secondfile.write(line)
     
-        
-        str1 = ''.join(description_name)
+       
+    with open('data.csv', 'r') as read_obj:
+        csv_reader = reader(read_obj)
+
+        for row in csv_reader:
+            
+            url=(row[0])
+            st.write(row)
+            st.text_input("URL",url)
+            response = session.get(url, headers=headers)
+            source = requests.get(url).text
+            soup = BeautifulSoup(source, 'lxml')
+            headline_ele = soup.find(class_='artsubject')
+            print("Headline")
+            headline = st.text_input("Headline",headline_ele.text)
+            description_ele = soup.find(class_='content')
+            st.write("  ")
+            description = description_ele.find_all("p")
+            for item in description:
+                summary.append(item.text)
+            str1 = ''.join(summary)
+            x = str1.split('।')
+            y = str1.replace("।", ".\n")
+            print(y)
+            st.text_area("Description",y,1000)
+#import plotly as px
+#df=px.data.gapminder().query("year==2008").query("content=='Europe'")
+#df.loc[df['pop']<2.e6,'country']=='other countries'
+#fig=px.pie(df,values='pop',names='country')
+
+#df=px.data.tips()
+#fig=px.pie(df,values='tip',names='day')
+#fig.show()
 
 
-        x = str1.split('.')
-        y = str1.replace(".", ".\n")
 
-        print(y)
-        URL = st.text_input("Url",url)
 
-        print("\n")
-        st.text_area("Description",y,1000)
